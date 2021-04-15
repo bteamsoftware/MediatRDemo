@@ -20,8 +20,8 @@ namespace DemoApp
 								 })
 								 .Build();
 
-			IDemoService app = ActivatorUtilities.CreateInstance<DemoService>(host.Services);
-			app.Run();
+			host.Services.GetService<DemoService>().Run();
+			host.Dispose();
 		}
 	}
 }
