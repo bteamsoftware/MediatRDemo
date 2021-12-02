@@ -2,13 +2,14 @@
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.Threading.Tasks;
 
 
 namespace DemoApp
 {
 	class Program
 	{
-		static void Main(string[] args)
+		static async Task Main(string[] args)
 		{
 			IHost host = Host.CreateDefaultBuilder()
 								 .ConfigureServices((context, services) =>
@@ -20,7 +21,8 @@ namespace DemoApp
 								 })
 								 .Build();
 
-			host.Services.GetService<DemoService>().Run();
+			IDemoService service = host.Services.GetService<IDemoService>();
+			await service.RunAsync();
 			host.Dispose();
 		}
 	}
