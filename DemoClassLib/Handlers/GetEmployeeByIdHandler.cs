@@ -2,26 +2,22 @@
 using DemoClassLib.Models;
 using DemoClassLib.Queries;
 using MediatR;
-using System.Threading;
-using System.Threading.Tasks;
 
 
-namespace DemoClassLib.Handlers
+namespace DemoClassLib.Handlers;
+
+
+public class GetEmployeeByIdHandler : IRequestHandler<GetEmployeeByIdQuery, Employee?>
 {
-	public class GetEmployeeByIdHandler : IRequestHandler<GetEmployeeByIdQuery, Employee>
+	private readonly IEmployeeDataAccess _dataAccess;
+
+
+	public GetEmployeeByIdHandler(IEmployeeDataAccess dataAccess)
 	{
-		private readonly IEmployeeDataAccess _dataAccess;
-
-
-		public GetEmployeeByIdHandler(IEmployeeDataAccess dataAccess)
-		{
-			_dataAccess = dataAccess;
-		}
-
-
-		public Task<Employee> Handle(GetEmployeeByIdQuery request, CancellationToken cancellationToken)
-		{
-			return Task.FromResult(_dataAccess.GetEmployeeById(request.Id));
-		}
+		_dataAccess = dataAccess;
 	}
+
+
+	public Task<Employee?> Handle(GetEmployeeByIdQuery request, CancellationToken cancellationToken) =>
+		Task.FromResult(_dataAccess.GetEmployeeById(request.Id));
 }

@@ -2,7 +2,7 @@
 using MediatR;
 
 
-namespace DemoClassLib.Queries
-{
-	public record GetEmployeeByIdQuery(int Id) : IRequest<Employee>;
-}
+namespace DemoClassLib.Queries;
+
+
+public record GetEmployeeByIdQuery(int Id) : IRequest<Employee?>;

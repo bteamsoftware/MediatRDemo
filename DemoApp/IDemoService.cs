@@ -1,10 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿namespace DemoApp;
 
 
-namespace DemoApp
+public interface IDemoService
 {
-	public interface IDemoService
-	{
-		Task RunAsync();
-	}
+	Task RunAsync();
 }
